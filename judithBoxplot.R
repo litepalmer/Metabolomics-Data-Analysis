@@ -1,3 +1,5 @@
+library(plyr)
+library(dplyr)
 library(reshape2)
 library(readr)
 library(data.table)
@@ -16,5 +18,5 @@ df.outOf <- filter(df.melt, variable == "present")
 bp <- ggplot(df.rsd, aes(x=index, y=value, group = index)) + geom_boxplot()
 bp 
 
-outOf <- ggplot(df.outOf, aes(value)) + geom_bar() + facet_grid(. ~ index)
+outOf <- ggplot(df.outOf, aes(value)) + geom_bar(width = .8,stat = "count") + facet_grid(. ~ index)
 outOf
