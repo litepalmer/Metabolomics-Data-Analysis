@@ -1,8 +1,5 @@
-library(dplyr)
 library(reshape2)
-library(plyr)
 library(readr)
-library(purrr)
 library(data.table)
 library(ggplot2)
 
