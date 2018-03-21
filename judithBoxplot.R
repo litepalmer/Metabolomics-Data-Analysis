@@ -7,8 +7,10 @@ library(ggplot2)
 library(ggpubr)
 
 #List all files in specific directory
-setwd("/Users/elliottpalmer/Downloads/judith")
-files <- list.files("/Users/elliottpalmer/Downloads/judith")
+rsdAndPresent <- function(directoryOfFiles){
+  
+setwd(directoryOfFiles)
+files <- list.files(directoryOfFiles)
 
 #Read in all files in set directory
 data <- lapply(files, FUN=read.table, header=TRUE)
@@ -41,3 +43,7 @@ outOf <- ggplot(df.outOf, aes(value, fill = index)) +
   theme(legend.position = "none")
 
 ggarrange(bp, outOf, ncol = 1, nrow = 2)
+
+}
+
+rsdAndPresent("/Users/elliottpalmer/Downloads/judith")
