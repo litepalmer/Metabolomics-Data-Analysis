@@ -16,9 +16,10 @@ removeAllNASamples <- function(x, totalNumberOfSamples){
 }
 blankFilter <- function(x, totalNumberOfBlanks){
   blankColumns <- 8:(8+totalNumberOfBlanks-1)
+  removeColumns <- -blankColumns
   x$blankCount <- apply(MVfilteredDataset[blankColumns],1,function(x) length(which(!is.na(x))))
   x <- subset(x, x$blankCount == 0)
-  x <- x[blankColumns]
+  x <- x[removeColumns]
 }
 
 ## READ IN CSV FILE
@@ -31,12 +32,12 @@ totalNumberOfBlanks <- 3
 ## (NAME OF CLASS, START COLUMN, NUMBER OF SAMPLES)
 blank <- filterFunc(blank, 18, 3)
 dil1 <- filterFunc(dil1, 21, 4)
-dil2 <- filterFunc(dil1, 25, 4)
-dil3 <- filterFunc(dil1, 29, 4)
-dil4 <- filterFunc(dil1, 33, 4)
-dil5 <- filterFunc(dil1, 37, 4)
-dil6 <- filterFunc(dil1, 41, 4)
-dil7 <- filterFunc(dil1, 45, 4)
+dil2 <- filterFunc(dil2, 25, 4)
+dil3 <- filterFunc(dil3, 29, 4)
+dil4 <- filterFunc(dil4, 33, 4)
+dil5 <- filterFunc(dil5, 37, 4)
+dil6 <- filterFunc(dil6, 41, 4)
+dil7 <- filterFunc(dil7, 45, 4)
 QC <- filterFunc(QC, 49, 2)
 
 filteredDataset <- merge(df[1:7], blank, by = "X", all = TRUE)
