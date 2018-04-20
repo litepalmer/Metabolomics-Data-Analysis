@@ -55,5 +55,3 @@ blankFilteredDataset <- blankFilter(MVfilteredDataset,totalNumberOfBlanks)
 
 ## WRITE CSV
 write.csv(filteredDatasetNoBlank, "C:\\Users\\eap520\\Downloads\\filteredDataset.csv", row.names = F)
-
-
