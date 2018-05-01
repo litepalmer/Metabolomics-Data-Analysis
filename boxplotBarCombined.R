@@ -22,14 +22,18 @@ names(data) <- basename(files)
 df <- rbindlist(data, idcol = "index")
 
 #Melt data into ggplot friendly dataframe and subset out data of interest
+  
+##### CHECK IF USING RSD or RSD_ALL AS VARIABLE!!!! 
 df.melt <- melt(data = df, id.vars = c("mz","index") )
 df.rsd <- filter(df.melt, variable == "rsd", value != 0)
 df.outOf <- filter(df.melt, variable == "present", value != 1.5)
 df.outOf$value <- as.factor(df.outOf$value)
 
 #Create boxplots of rsd
+#Change coord cartesian values to get correct y axis limits
 bp <- ggplot(df.rsd, aes(x=index, y=value, group = index, fill = index)) + 
   geom_boxplot(size = 1) +
+  coord_cartesian(ylim=c(0,100))+
   theme(legend.position = "none", 
         axis.title.x=element_blank(),
         axis.text.x=element_blank(),
