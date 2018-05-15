@@ -1,0 +1,21 @@
+
+reformatPUTMETID <- function(directory, filename){
+
+setwd(directory)
+df <- read.csv(filename)
+df <- df[order(df$mz),]
+variable.df <- df[1:3]
+matrix.df <- df[-1:-3]
+median <- apply(matrix.df, 1, median, na.rm = TRUE)
+matrix.df[is.na(matrix.df)] <- "NaN"
+variable.df <- cbind(variable.df, median)
+variable.df[is.na(variable.df)] <- "NaN"
+variable.df$name <- substring(variable.df$name,2)
+
+colnames(variable.df)[4]<-"MPA"
+
+write.table(variable.df, "peaks.txt", sep = "\t", col.names = TRUE, row.names = FALSE, quote = FALSE)
+write.table(matrix.df, "data.txt", sep = "\t", row.names = FALSE, col.names = FALSE, quote = FALSE)
+
+}
+reformatPUTMETID("/Users/elliottpalmer/Downloads/annie", "beams2_1LN_1.csv")
